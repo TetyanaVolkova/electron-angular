@@ -1,0 +1,19 @@
+<div *ngIf="columns | async as tableColumns" class="container">
+    <div id="actions">
+        <button id="add_column" mat-raised-button (click)="addColumn()"> Add column </button>
+        <button id="remove_column" mat-raised-button (click)="removeColumn()"> Remove column </button>
+    </div>
+    <div id="table_wrapper">
+        <table id="table">
+            <tr>
+                <ng-container *ngFor="let header of displayedColumns; let i=index">
+                    <th>{{ header.toUpperCase() }}</th>
+                </ng-container>
+            </tr>
+
+            <tr *ngFor="let row of tableColumns">
+                <td *ngFor="let list of row | keys">{{ row[list] }}</td>
+            </tr>
+        </table>
+    </div>
+</div>

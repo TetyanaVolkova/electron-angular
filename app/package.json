@@ -1,0 +1,11 @@
+{
+    "name": "angular-electron",
+    "description": "Angular Electron app",
+    "author": {
+        "name": "Tetyana Volkova"
+    },
+    "version": "1.0.0",
+    "main": "main.js",
+    "private": true,
+    "dependencies": {}
+}
