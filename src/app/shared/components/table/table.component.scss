@@ -1,3 +1,8 @@
+:host {
+    width: 100%;
+    min-width: 600px;
+}
+
 .container {
     padding: 2%;
 }
@@ -10,8 +15,42 @@ h1 {
     display: flex;
 }
 
-#actions {
-    padding: 12px;
+.error {
+    opacity: 0;
+    height: 60px;
+}
+
+.show_error {
+    opacity: 1;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid #42A948;
+    /* green */
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+}
+
+.alert div {
+    background-color: #fed3d3;
+    color: #820000;
+    padding: 1rem;
+    margin-bottom: 8px;
+}
+
+label {
+    display: block;
+    margin: 0 0 .5rem .5rem;
+    font-size: 16px;
+    color: rgb(115, 113, 144);
+}
+
+.actions {
+    padding: 35px 0;
     display: flex;
     justify-content: flex-end;
     gap: 3%;
@@ -24,6 +63,9 @@ table {
     border-collapse: collapse;
     background-color: #f6f6f6;
     margin: auto;
+    tr {
+        box-shadow: 0 2px 20px #cfc7c7;
+    }
 }
 
 
@@ -33,11 +75,19 @@ td,
 th {
     border: solid 1px #3fa0aa61;
     padding: 18px;
-    background: #cdf5ff87;
+}
+
+tr {
+    .odd {
+        background: #b5dae487;
+    }
+    .even {
+        background: #e3f2f587;
+    }
 }
 
 th {
-    background: #a5eef6;
+    background: #92bec3;
     color: black;
     position: sticky;
     top: 0;
@@ -53,21 +103,137 @@ button {
     border: none;
     padding: 10px;
     font-size: 1.375rem;
-    border-radius: 2px;
+    border-radius: 6px;
     margin-top: 20px;
+    -webkit-box-shadow: 0 7px 4px #c1baba;
+    -moz-box-shadow: 0 7px 4px #c1baba;
+    box-shadow: 0 7px 4px #c1baba;
     cursor: pointer;
-}
-
-#add_column {
-    background: #40b2c6a1;
     &:hover {
-        background: #79bdc9a1;
+        -webkit-box-shadow: 0 5px 2px #b5a7a7;
+        -moz-box-shadow: 0 5px 2px #b5a7a7;
+        box-shadow: 0 5px 2px #b5a7a7;
+    }
+    &:disabled {
+        cursor: not-allowed;
     }
 }
 
-#remove_column {
-    background: #f27bac8c;
+.add_column {
+    background: #91a0b9a1;
     &:hover {
-        background: #fabdd78c;
+        background: #a9b3c3a1;
     }
+}
+
+.remove_column {
+    background: #cdaab88c;
+    &:hover {
+        background: #b39da68c;
+    }
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.download_button {
+    width: 100px;
+    background: #faa6a6;
+    &:hover {
+        background: #fcb8b8;
+    }
+}
+
+#back_drop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    background: rgb(0 0 0 / 70%);
+}
+
+#dialog_container {
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    // height: 60%;
+    background: #f5f1f1;
+    z-index: 1000;
+    -webkit-box-shadow: 0 5px 2px #777;
+    -moz-box-shadow: 0 5px 2px #777;
+    box-shadow: 0 8px 27px #1a9fbd80;
+    border-radius: 10px;
+}
+
+section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#main_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    overflow: auto;
+}
+
+.modal .flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    background: #92bec3;
+    border-radius: 8px;
+    box-shadow: 00 5px 8px #a39e9e;
+}
+
+input {
+    padding: 0.7rem 1rem;
+    background: transparent;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 95%;
+    font-size: 16px;
+}
+
+select {
+    padding: 0.7rem 1rem;
+    background: transparent;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    option {
+        font-size: 16px;
+        background: rgba(227, 242, 245, 0.5294117647);
+        border: solid 1px rgba(36, 109, 117, 0.38);
+        margin: 6px 0;
+        &:active {
+            background: rgba(101, 225, 250, 0.529);
+        }
+    }
+    .options_info:disabled {
+        font-size: 17px;
+        font-weight: 600;
+        color: #28a8b7;
+        margin-bottom: 81px;
+    }
+}
+
+.modal p {
+    color: #777;
+}
+
+.btn-close {
+    margin: auto 0;
+    padding: 0.5rem 0.7rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }

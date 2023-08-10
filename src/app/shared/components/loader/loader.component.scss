@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+}
+
+.loader {
+    margin: auto;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #92bec3;
+    border-radius: 50%;
+    width: 25vh;
+    height: 25vh;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

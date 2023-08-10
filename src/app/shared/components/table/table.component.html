@@ -1,19 +1,113 @@
 <div *ngIf="columns | async as tableColumns" class="container">
-    <div id="actions">
-        <button id="add_column" mat-raised-button (click)="addColumn()"> Add column </button>
-        <button id="remove_column" mat-raised-button (click)="removeColumn()"> Remove column </button>
+    <div class="actions">
+        <button class="add_column" mat-raised-button (click)="openAddDialogWindow()"> Add column</button>
+        <button [disabled]="displayedColumns.length <= 1" class="remove_column" mat-raised-button (click)="openRemoveDialogWindow()"> Remove column</button>
+        <button class="download_button" mat-raised-button (click)="download('csv')">To CSV</button>
+        <button class="download_button" mat-raised-button (click)="download('sql')">To SQL</button>
     </div>
     <div id="table_wrapper">
-        <table id="table">
+        <table *ngIf="!noColumns" id="table">
             <tr>
                 <ng-container *ngFor="let header of displayedColumns; let i=index">
                     <th>{{ header.toUpperCase() }}</th>
                 </ng-container>
             </tr>
 
-            <tr *ngFor="let row of tableColumns">
-                <td *ngFor="let list of row | keys">{{ row[list] }}</td>
+            <tr *ngFor="let row of tableColumns; let i = index">
+                <td [ngClass]="(i%2 === 1)? 'odd': 'even'" *ngFor="let list of row | keys">{{ row[list] }}</td>
             </tr>
         </table>
     </div>
 </div>
+
+<!-- Add column dialog -->
+<ng-container *ngIf="openAddDialog">
+    <div id="back_drop"></div>
+    <div id="dialog_container">
+        <section class="modal">
+            <div class="flex">
+                <h1>Add Column</h1>
+                <button (click)="openAddDialog = false" class="btn-close">⨉</button>
+            </div>
+            <div id="main_content">
+                <div>
+                    <span></span>
+                    <br/>
+                    <label [for]="name">Add Column Name:</label>
+                    <input type="text" id="name" name="name" required minlength="3" placeholder="Column name" [(ngModel)]="columnName" #name="ngModel">
+                    <div [ngClass]="!(name.invalid && (name.dirty || name.touched))? 'error': 'show_error'" class="alert">
+
+                        <div *ngIf="name.errors?.['required']">
+                            Column name is required.
+                        </div>
+                        <div *ngIf="name.errors?.['minlength']">
+                            Column name must be at least 3 characters long.
+                        </div>
+                    </div>
+
+                    <label [for]="type">Column Type:</label>
+                    <select id="type" name="type" [(ngModel)]="columnType" #type="ngModel">
+                      <option class="options_info" [disabled]="true">Data types:</option>
+                      <option value="string">String</option>
+                      <option value="boolean">Boolean</option>
+                      <option value="number">Number</option>
+                      <option value="date">Date</option>
+                      <hr/>
+                      <option [disabled]="true"></option>
+                      <option class="options_info" [disabled]="true">Data options:</option>
+                      <option value="jbId">JbId</option>
+                      <option value="authCode">AuthCode</option>
+                      <option value="full name">Full Name</option>
+                      <option value="job title">Job Title</option>
+                      <option value="email">Email</option>
+                      <option value="phone">Phone Number</option>
+                      <option value="company name">Company Name</option>
+                      <option value="product">Product</option>
+                      <option value="price">Price</option>
+                      <option value="chemical element">Chemical Element</option>
+                      <option value="vehicle">Vehicle</option>
+                      <option value="animal">Animal</option>
+                      <option value="color">Color</option>
+                      <option value="avatar url">Avatar URI</option>
+                      <option value="emoji">Emoji</option>
+                    </select>
+                </div>
+
+                <div class="actions">
+                    <button (click)="openAddDialog = false; columnName=''" class="remove_column">Cancel</button>
+                    <button [disabled]="name.invalid || type.invalid" (click)="addColumn()" class="add_column">Add Column</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</ng-container>
+
+<!-- Remove column dialog -->
+<ng-container *ngIf="openRemoveDialog">
+    <div id="back_drop"></div>
+    <div id="dialog_container">
+        <section class="modal">
+            <div class="flex">
+                <h1>Remove Column</h1>
+                <button (click)="openRemoveDialog = false" class="btn-close">⨉</button>
+            </div>
+            <div id="main_content">
+                <div>
+                    <span></span>
+                    <br/>
+                    <label for="columns_to_remove ">Choose a column to remove:</label>
+                    <select name="columns_to_remove" id="columns_to_remove" [(ngModel)]="columnToRemove" #toRemove="ngModel">
+                      <option [disabled]="true">Select column:</option>
+                      <option *ngFor="let columnName of displayedColumns" [value]="columnName">{{columnName.toUpperCase()}}</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button (click)="openRemoveDialog = false; columnToRemove=''" class="remove_column">Cancel</button>
+                    <button [disabled]="toRemove.invalid" (click)="removeColumn()" class="add_column">Remove Column</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</ng-container>
+
+<app-loader *ngIf="(columns | async) === null"></app-loader>
