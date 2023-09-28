@@ -2,8 +2,9 @@
     <div class="actions">
         <button class="add_column" mat-raised-button (click)="openAddDialogWindow()"> Add column</button>
         <button [disabled]="displayedColumns.length <= 1" class="remove_column" mat-raised-button (click)="openRemoveDialogWindow()"> Remove column</button>
-        <button class="download_button" mat-raised-button (click)="download('csv')">To CSV</button>
-        <button class="download_button" mat-raised-button (click)="download('sql')">To SQL</button>
+
+        <app-download-button [format]="'csv'" [data]="data"></app-download-button>
+        <app-download-button [format]="'sql'" [data]="data"></app-download-button>
     </div>
     <div id="table_wrapper">
         <table *ngIf="!noColumns" id="table">

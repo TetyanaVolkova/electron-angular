@@ -9,6 +9,7 @@ import { TableComponent } from './components/table/table.component';
 import { KeysPipe } from './components/table/keys-pipe.pipe';
 import { AddColumnDialogComponent } from './dialogs/add-column-dialog/add-column-dialog.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { DownloadButtonComponent } from './components/download-button/download-button.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     TableComponent,
     KeysPipe,
     AddColumnDialogComponent,
-    LoaderComponent
+    LoaderComponent,
+    DownloadButtonComponent
   ],
   imports: [
     CommonModule, TranslateModule, FormsModule

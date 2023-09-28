@@ -47,6 +47,7 @@
         "@types/body-parser": "^1.19.2",
         "rxjs": "7.8.1",
         "tslib": "^2.5.0",
+        "xlsx": "^0.18.5",
         "zone.js": "~0.13.1"
     },
     "overrides": {
