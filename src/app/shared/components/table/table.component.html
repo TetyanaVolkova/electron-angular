@@ -5,6 +5,7 @@
 
         <app-download-button [format]="'csv'" [data]="data"></app-download-button>
         <app-download-button [format]="'sql'" [data]="data"></app-download-button>
+        <app-download-button [format]="'json'" [data]="data"></app-download-button>
     </div>
     <div id="table_wrapper">
         <table *ngIf="!noColumns" id="table">
