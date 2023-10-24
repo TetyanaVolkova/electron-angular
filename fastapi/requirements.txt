@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic[email]
+fastapi-cache2
+boto3
+httpx
+pytest
+jsonschema
+sqlalchemy
+pymysql
+mysql-connector-python

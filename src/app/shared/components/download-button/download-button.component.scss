@@ -35,7 +35,11 @@ button {
     min-height: 300px;
     top: 30%;
     left: 40%;
-    z-index: 9999;
+    z-index: 1000;
+    -webkit-box-shadow: 0 5px 2px #777;
+    -moz-box-shadow: 0 5px 2px #777;
+    box-shadow: 0 8px 27px #1a9fbd80;
+    border-radius: 10px;
     >div {
         display: flex;
         flex-direction: column;
@@ -77,4 +81,14 @@ button {
 
 .show_error {
     opacity: 1;
+}
+
+#back_drop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  background: rgb(0 0 0 / 70%);
 }

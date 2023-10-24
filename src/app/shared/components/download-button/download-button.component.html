@@ -1,21 +1,25 @@
 <button mat-raised-button (click)="downloadConform = !downloadConform">To {{format.toUpperCase()}}</button>
-<div id="download_popup" *ngIf="downloadConform">
-    <div>
-        <div id="input_container">
-            <input type="text" required minlength="3" placeholder="Give name to your file" [(ngModel)]="fileName" #name="ngModel" />
-            <div [ngClass]="!(name.invalid && (name.dirty || name.touched))? 'error': 'show_error'" class="error_container">
-                <div *ngIf="name.errors?.['required']">
-                    Column name is required.
-                </div>
-                <div *ngIf="name.errors?.['minlength']">
-                    Column name must be at least 3 characters long.
-                </div>
-            </div>
-        </div>
+<ng-container *ngIf="downloadConform">
+  <div id="back_drop"></div>
+  <div id="download_popup">
+      <div>
+          <div id="input_container">
+            <h3>Do you want to download data in {{format.toUpperCase()}} format?</h3>
+              <input type="text" required minlength="3" placeholder="Give name to your file" [(ngModel)]="fileName" #name="ngModel" />
+              <div [ngClass]="!(name.invalid && (name.dirty || name.touched))? 'error': 'show_error'" class="error_container">
+                  <div *ngIf="name.errors?.['required']">
+                      Column name is required.
+                  </div>
+                  <div *ngIf="name.errors?.['minlength']">
+                      Column name must be at least 3 characters long.
+                  </div>
+              </div>
+          </div>
 
-        <div id="button_container">
-            <button (click)="downloadConform = !downloadConform">Cancel</button>
-            <button [disabled]="name.invalid" (click)="download(); downloadConform = !downloadConform">Download</button>
-        </div>
-    </div>
-</div>
+          <div id="button_container">
+              <button (click)="downloadConform = !downloadConform">Cancel</button>
+              <button [disabled]="name.invalid" (click)="download(); downloadConform = !downloadConform">Download</button>
+          </div>
+      </div>
+  </div>
+</ng-container>

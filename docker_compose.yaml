@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  fastapi:
+    build: "./fastapi"
+    ports:
+      - "8125:8125"
+    volumes:
+      - type: bind
+        source: ./fastapi
+        target: /app
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    env_file:
+      - /fastapi/.env
+    networks:
+      - my-shared-network
+
+networks:
+  my-shared-network:
+    driver: bridge
